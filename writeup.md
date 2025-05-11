@@ -4,9 +4,9 @@ May 5th, 2025
 # SEED Lab: ARP Attack
 # Table of Contents
 1. [Starting the Lab](#starting-the-lab)
-2. [Task 1: ARP Cache Poisoning](#task-1:-arp-cache-poisoning)
-3. [Task 2: MITM Attack on Telnet using ARP Cache Poisoning](#task-2:-mitm-attack-on-telnet-using-arp-cache-poisoning)
-4. [Task 3: MITM Attack on Netcat using ARP Cache Poisoning](#task-3:-mitm-attack-on-netcat-using-arp-cache-poisoning)
+2. [Task 1: ARP Cache Poisoning](#task-1-arp-cache-poisoning)
+3. [Task 2: MITM Attack on Telnet using ARP Cache Poisoning](#task-2-mitm-attack-on-telnet-using-arp-cache-poisoning)
+4. [Task 3: MITM Attack on Netcat using ARP Cache Poisoning](#task-3-mitm-attack-on-netcat-using-arp-cache-poisoning)
 
 # Starting the Lab
 ## Starting Docker
