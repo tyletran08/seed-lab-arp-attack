@@ -110,7 +110,7 @@ root@A-10.9.0.6:/# ifconfig
 On host M, construct an ARP request packet to map B’s IP address
 to M’s MAC address. Send the packet to A and check whether the attack is successful or not.
 
-#### Python ARP-Request.py
+#### Python [ARP-Request.py](https://github.com/tyletran08/seed-lab-arp-attack/blob/main/python/ARP-Request.py)
 ```python
 from scapy.all import *
 
@@ -181,7 +181,7 @@ On host M, construct an ARP reply packet to map B’s IP address to M’s MAC ad
 - **Scenario 2:** B’s IP is not in A’s cache. You can use the command "arp -d a.b.c.d" to
 remove the ARP cache entry for the IP address a.b.c.d.
 
-#### Python ARP-Reply.py
+#### Python [ARP-Reply.py](https://github.com/tyletran08/seed-lab-arp-attack/blob/main/python/ARP-Reply.py)
 ```python
 from scapy.all import *
 
@@ -270,7 +270,7 @@ the following characteristics:
 address (ff:ff:ff:ff:ff:ff).
 - No reply is expected.
 
-#### Python ARP-Reply.py
+#### Python [ARP-Gratuitious.py](https://github.com/tyletran08/seed-lab-arp-attack/blob/main/python/ARP-Gratuitious.py)
 ```python
 from scapy.all import *
 
@@ -352,7 +352,7 @@ root@A-10.9.0.5:/# arp -n
 ## Step 1 (Launch the ARP cache poisoning attack)
 First, Host M conducts an ARP cache poisoningattack on both A and B, such that in A’s ARP cache, B’s IP address maps to M’s MAC address, and in B’s ARP cache, A’s IP address also maps to M’s MAC address. After this step, packets sent between A and B will all be sent to M. We will use the ARP cache poisoning attack from Task 1 to achieve this goal. It is better that you send out the spoofed packets constantly (e.g. every 5 seconds); otherwise, the fake entries may be replaced by the real ones.
 
-#### Python ARP-Poisoning.py
+#### Python [ARP-Poisoning.py](https://github.com/tyletran08/seed-lab-arp-attack/blob/main/python/ARP-Poisoning.py)
 ```python
 # arp_poison.py
 from scapy.all import *
@@ -450,7 +450,7 @@ root@B-10.9.0.6:/# arp -n
 	Address                  HWtype  HWaddress           Flags Mask            Iface
 	10.9.0.5                 ether   02:42:0a:09:00:69   C                     eth0
 ```
-![91b2453406cf61216bc85e73d25982a6.png](:/49ecf247e7e24cff877883997eed5bea)
+![task2step2.png](https://github.com/tyletran08/seed-lab-arp-attack/blob/main/Screenshots/task2step2.png?raw=true)
 
 #### Results
 > With IP Forwarding turn off on Host M, all the packets between Victim A and Victim B is lost. Both does not retrieve the packet back so they report it as a loss.
@@ -532,7 +532,7 @@ root@B-10.9.0.6:/# arp -n
 	10.9.0.5                 ether   02:42:0a:09:00:69   C                     eth0
 	10.9.0.105               ether   02:42:0a:09:00:69   C                     eth0
 ```
-![ef9c2cf16de3c19c27f7cd2b58d715b4.png](:/d7c71424ffdf431abf2fe763572743ae)
+![task2step3.png](https://github.com/tyletran08/seed-lab-arp-attack/blob/main/Screenshots/task2step3.png?raw=true)
 
 #### Results
 > With IP Forwarding turn on in Host M, all the packets between Victim A and Victim B is retrieved. Since it is retrieved, both Victim A and Victim B reports no loss.
@@ -544,7 +544,7 @@ From the previous steps, we are able to redirect the TCP packets to Host M, but 
   > sysctl net.ipv4.ip_forward=0
 - We run our sniff-and-spoof program on Host M, such that for the captured packets sent from A to B, we spoof a packet but with TCP different data. For packets from B to A (Telnet response), we do not make any change, so the spoofed packet is exactly the same as the original one.
 
-#### Python ARP-MITM-Attack.py
+#### Python ARP-MITM-Attack.py [ARP-MITM-Attack.py](https://github.com/tyletran08/seed-lab-arp-attack/blob/main/python/ARP-MITM-Attack.py)
 ```python
 from scapy.all import *
 
@@ -647,7 +647,7 @@ root@M-10.9.0.105:/# telnet 10.9.0.6
 // After Attack
 	root@bd725fd9c4b6:~# ZZZZZZZZZZZZ
 ```
-![7a03ba329a3c5ead70e801a7d0b45ae0.png](:/b776a02dee134aab8650ce3a4dc61edb)
+![task2step4.png](https://github.com/tyletran08/seed-lab-arp-attack/blob/main/Screenshots/task2step4.png?raw=true)
 
 #### Results
 > With IP Forwarding turn off in Host M, Victim A does not see what it is typing to Victim B when using telnet. Everything that is typed is invisible, like it is not being typed at all.
@@ -665,7 +665,7 @@ On Host A (client), run the following:
 ```
 Once the connection is made, you can type messages on A. Each line of messages will be put into a TCP packet sent to B, which simply displays the message. Your task is to replace every occurrence of your first name in the message with a sequence of A’s. The length of the sequence should be the same as that of your first name, or you will mess up the TCP sequence number, and hence the entire TCP connection. You need to use your real first name, so we know the work is done by you.
 
-#### Python ARP-MITM-Attack-Name.py
+#### Python [ARP-MITM-Attack-Name.py](https://github.com/tyletran08/seed-lab-arp-attack/blob/main/python/ARP-MITM-Attack-Name.py)
 ```python
 from scapy.all import *
 
@@ -769,7 +769,7 @@ root@A-10.9.0.5:/# nc 10.9.0.6 9090
 // After Attack
 	My name is Tyler
 ```
-![f607a5cc0065d2256f932b0385f7448f.png](:/2aad5650ce734501a846b0d72cf78c60)
+![task3.png](https://github.com/tyletran08/seed-lab-arp-attack/blob/main/Screenshots/task3.png?raw=true)
 
 #### Results
 > Task 3 is the same as Task 2 results except that whenever "Tyler" is sent and seen within the packets, it will be A'ed out. If the client (Victim A) sends a message that contains "My name is Tyler", the server (Victim B) would recieved a modified packet "My name is AAAAA". 
